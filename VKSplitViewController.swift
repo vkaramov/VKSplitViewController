@@ -10,7 +10,7 @@ import UIKit
 /**
 *   An easy-to-use UISplitViewController replacement with the simple interface
 */
-@availability(iOS, introduced=7.0)
+@available(iOS, introduced=7.0)
 class VKSplitViewController: UIViewController
 {
     /** Assigning a new value to this property animating showing or hiding master view controller respectively. Default is true. See `showMasterViewController(show : Bool, completion : (() -> Void)?)`
@@ -135,7 +135,7 @@ class VKSplitViewController: UIViewController
         super.viewDidLoad()
 
         separator = UIView(frame: CGRectZero);
-        separator?.setTranslatesAutoresizingMaskIntoConstraints(false);
+        separator?.translatesAutoresizingMaskIntoConstraints = false;
         separator?.backgroundColor = separatorColor;
         view.addSubview(separator!);
     }
@@ -145,8 +145,8 @@ private extension VKSplitViewController
 {
     func _setViewControllers(masterController : UIViewController, _ detailController : UIViewController)
     {
-        masterController.view.setTranslatesAutoresizingMaskIntoConstraints(false);
-        detailController.view.setTranslatesAutoresizingMaskIntoConstraints(false);
+        masterController.view.translatesAutoresizingMaskIntoConstraints = false;
+        detailController.view.translatesAutoresizingMaskIntoConstraints = false;
         
         if (nil != self.masterVc && nil != self.detailVc)
         {
@@ -183,7 +183,7 @@ private extension VKSplitViewController
         }
     }
     
-    func replaceExistingViewController(#existingController : UIViewController, newController : UIViewController)
+    func replaceExistingViewController(existingController existingController : UIViewController, newController : UIViewController)
     {
         existingController.willMoveToParentViewController(nil);
         addChildViewController(newController);
@@ -198,7 +198,7 @@ private extension VKSplitViewController
         }
     }
     
-    func addConstraintsTo(#masterController : UIViewController, detailController : UIViewController)
+    func addConstraintsTo(masterController masterController : UIViewController, detailController : UIViewController)
     {
         self.masterViewLeadingConstraint = NSLayoutConstraint(item: masterController.view, attribute: .Leading, relatedBy: .Equal, toItem: self.view, attribute: .Leading, multiplier: 1.0, constant: 0);
         
@@ -214,12 +214,12 @@ private extension VKSplitViewController
             "separator": self.separator!,
             "detail": detailController.view];
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[master]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views));
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[master]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views));
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[separator]|", options:NSLayoutFormatOptions(0), metrics:nil, views:views));
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[separator]|", options:NSLayoutFormatOptions(rawValue: 0), metrics:nil, views:views));
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[detail]|", options:NSLayoutFormatOptions(0), metrics:nil, views:views));
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[detail]|", options:NSLayoutFormatOptions(rawValue: 0), metrics:nil, views:views));
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:[master]-0-[separator]-0-[detail]|", options: NSLayoutFormatOptions(0), metrics: nil, views: views));
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:[master]-0-[separator]-0-[detail]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: views));
     }
 }
