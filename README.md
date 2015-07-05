@@ -4,12 +4,12 @@ Features
 --------
 * Easy to use.
 * Highly customizable. You can hide and show master view any time you want, etc.
-* Written in Swift.
+* Written in Swift 1.2.
 
-Prerequisite
+Prerequisites
 ------------
 * ARC
-* Xcode 6+, which supports Swift 1.2.
+* Xcode 6+.
 * iOS 7+, or
 
 How to install
