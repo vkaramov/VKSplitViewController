@@ -8,7 +8,7 @@
 import UIKit
 
 /**
-*   An easy-to use UISplitViewController replacement with the simple interface
+*   An easy-to-use UISplitViewController replacement with the simple interface
 */
 @availability(iOS, introduced=7.0)
 class VKSplitViewController: UIViewController
