@@ -11,11 +11,11 @@ import UIKit
 *   An easy-to-use UISplitViewController replacement with the simple interface
 */
 @available(iOS, introduced=7.0)
-class VKSplitViewController: UIViewController
+public class VKSplitViewController: UIViewController
 {
     /** Assigning a new value to this property animating showing or hiding master view controller respectively. Default is true. See `showMasterViewController(show : Bool, completion : (() -> Void)?)`
     */
-    var masterViewControllerVisible : Bool
+    public var masterViewControllerVisible : Bool
     {
         set
         {
@@ -29,37 +29,37 @@ class VKSplitViewController: UIViewController
     
     /** Width of master view controller in points. The rest of the space will be occupied by the detail controller and the separator. Default is 320pt.
     */
-    var masterViewControllerWidth : CGFloat = 320.0
+    public var masterViewControllerWidth : CGFloat = 320.0
     {
         didSet
         {
-            self.masterViewWidthConstraint?.constant = masterViewControllerWidth;
+            self.masterViewWidthConstraint.constant = masterViewControllerWidth;
         }
     }
     
     /** Separator color. Default is UIColor.lightGrayColor()
     */
-    var separatorColor : UIColor = UIColor.lightGrayColor()
+    public var separatorColor : UIColor = UIColor.lightGrayColor()
     {
         didSet
         {
-            separator?.backgroundColor = separatorColor;
+            separator.backgroundColor = separatorColor;
         }
     }
     
     /** Width of the separator. Default is 1pt.
     */
-    var separatorWidth : CGFloat = 1.0
+    public var separatorWidth : CGFloat = 1.0
     {
         didSet
         {
-            separatorWidthConstraint?.constant = separatorWidth;
+            separatorWidthConstraint.constant = separatorWidth;
         }
     }
     
     /** Controller added to the left of the widget. **Read-only**. To set its value use `setViewControllers(masterController : UIViewController, detailController : UIViewController)`
     */
-    var masterViewController : UIViewController?
+    public var masterViewController : UIViewController?
     {
         get
         {
@@ -69,7 +69,7 @@ class VKSplitViewController: UIViewController
     
     /** Controller added to the right of the widget. **Read-only**. To set its value use `setViewControllers(masterController : UIViewController, detailController : UIViewController)`
     */
-    var detailViewController : UIViewController?
+    public var detailViewController : UIViewController?
     {
         get
         {
@@ -81,7 +81,7 @@ class VKSplitViewController: UIViewController
         :param: masterController Controller added to the left of the widget.
         :param: detailController Controller added to the right of the widget.
     */
-    func setViewControllers(masterController : UIViewController, detailController : UIViewController)
+    public func setViewControllers(masterController : UIViewController, detailController : UIViewController)
     {
         self._setViewControllers(masterController, detailController);
     }
@@ -91,7 +91,7 @@ class VKSplitViewController: UIViewController
         :param: animated    If true, show/hide is performed using animation.
         :param: completion: A block object to be executed when the animation sequence ends.
     */
-    func showMasterViewController(show : Bool, animated: Bool, completion : (() -> Void)?)
+    public func showMasterViewController(show : Bool, animated: Bool, completion : (() -> Void)?)
     {
         assert(nil != self.masterVc && nil != self.detailVc, "You should call setViewControllers() before calling this method \(__FUNCTION__)");
         
@@ -99,7 +99,7 @@ class VKSplitViewController: UIViewController
         {
             self.isMasterVisible = show;
             
-            self.masterViewLeadingConstraint?.constant = show  ? 0.0 : -self.masterViewControllerWidth - self.separatorWidth;
+            self.masterViewLeadingConstraint.constant = show  ? 0.0 : -self.masterViewControllerWidth - self.separatorWidth;
             
             self.detailVc?.view.setNeedsLayout();
             
@@ -121,23 +121,23 @@ class VKSplitViewController: UIViewController
     
     /** Duration of master controller's hide/show animation. Default is 0.5
     */
-    var animationDuration : NSTimeInterval = 0.5;
+    public var animationDuration : NSTimeInterval = 0.5;
     
-    private var separator : UIView?;
-    private var masterViewLeadingConstraint : NSLayoutConstraint?;
-    private var masterViewWidthConstraint : NSLayoutConstraint?;
-    private var separatorWidthConstraint : NSLayoutConstraint?;
+    private var separator : UIView!;
+    private var masterViewLeadingConstraint : NSLayoutConstraint!;
+    private var masterViewWidthConstraint : NSLayoutConstraint!;
+    private var separatorWidthConstraint : NSLayoutConstraint!;
     private var masterVc : UIViewController?;
     private var detailVc : UIViewController?;
     private var isMasterVisible = true;
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         separator = UIView(frame: CGRectZero);
-        separator?.translatesAutoresizingMaskIntoConstraints = false;
-        separator?.backgroundColor = separatorColor;
-        view.addSubview(separator!);
+        separator.translatesAutoresizingMaskIntoConstraints = false;
+        separator.backgroundColor = separatorColor;
+        view.addSubview(separator);
     }
 }
 
@@ -206,9 +206,9 @@ private extension VKSplitViewController
         
         self.separatorWidthConstraint = NSLayoutConstraint(item: self.separator!, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: self.separatorWidth);
         
-        self.view.addConstraint(self.masterViewLeadingConstraint!);
-        self.view.addConstraint(self.masterViewWidthConstraint!);
-        self.view.addConstraint(self.separatorWidthConstraint!);
+        self.view.addConstraint(self.masterViewLeadingConstraint);
+        self.view.addConstraint(self.masterViewWidthConstraint);
+        self.view.addConstraint(self.separatorWidthConstraint);
         
         let views = ["master" : masterController.view,
             "separator": self.separator!,
